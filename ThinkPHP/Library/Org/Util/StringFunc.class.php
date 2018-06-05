@@ -9,7 +9,7 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 namespace Org\Util;
-class String {
+class StringFunc{
 
     /**
      * 生成UUID 单机使用
@@ -17,15 +17,15 @@ class String {
      * @return string
      */
      static public function uuid() {
-        $charid = md5(uniqid(mt_rand(), true));
+        $charId = md5(uniqid(mt_rand(), true));
         $hyphen = chr(45);// "-"
-        $uuid = chr(123)// "{"
-               .substr($charid, 0, 8).$hyphen
-               .substr($charid, 8, 4).$hyphen
-               .substr($charid,12, 4).$hyphen
-               .substr($charid,16, 4).$hyphen
-               .substr($charid,20,12)
-               .chr(125);// "}"
+         // "{"chr(123)
+        $uuid = substr($charId, 0, 8).$hyphen
+               .substr($charId, 8, 4).$hyphen
+               .substr($charId,12, 4).$hyphen
+               .substr($charId,16, 4).$hyphen
+               .substr($charId,20,12);
+        // "}"chr(125)
         return $uuid;
     }
 
@@ -34,7 +34,7 @@ class String {
      * @return Boolean
      */
     static public function keyGen() {
-        return str_replace('-','',substr(String::uuid(),1,-1));
+        return str_replace('-','',substr(StringFunc::uuid(),1,-1));
     }
 
     /**
@@ -188,13 +188,13 @@ class String {
                 $char = substr($format,$i,1);
                 switch($char){
                     case "*"://字母和数字混合
-                        $strtemp   .= String::randString(1);
+                        $strtemp   .= StringFunc::randString(1);
                         break;
                     case "#"://数字
-                        $strtemp  .= String::randString(1,1);
+                        $strtemp  .= StringFunc::randString(1,1);
                         break;
                     case "$"://大写字母
-                        $strtemp .=  String::randString(1,2);
+                        $strtemp .=  StringFunc::randString(1,2);
                         break;
                     default://其他格式均不转换
                         $strtemp .=   $char;
