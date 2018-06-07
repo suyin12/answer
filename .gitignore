@@ -12,4 +12,3 @@ nginx_conf/
 *.project/
 *.DS_Store/
 .DS_Store
-vendor/
